@@ -1,15 +1,15 @@
 window.addEventListener('DOMContentLoaded', () => {
    const
-       cartWrapper = document.querySelector('.cart__wrapper'),
-       cart = document.querySelector('.cart'),
-       close = document.querySelector('.cart__close'),
-       open = document.querySelector('#cart'),
-       goodsBtn = document.querySelectorAll('.goods__btn'),
-       products = document.querySelectorAll('.goods__item'),
-       confirm = document.querySelector('.confirm'),
-       badge = document.querySelector('.nav__badge'),
-       totalCost = document.querySelector('.cart__total > span'),
-       titles = document.querySelectorAll('.goods__title');
+      cartWrapper = document.querySelector('.cart__wrapper'),
+      cart = document.querySelector('.cart'),
+      close = document.querySelector('.cart__close'),
+      open = document.querySelector('#cart'),
+      goodsBtn = document.querySelectorAll('.goods__btn'),
+      products = document.querySelectorAll('.goods__item'),
+      confirm = document.querySelector('.confirm'),
+      badge = document.querySelector('.nav__badge'),
+      totalCost = document.querySelector('.cart__total > span'),
+      titles = document.querySelectorAll('.goods__title');
 
    function openCart() {
       cart.style.display = 'block';
@@ -41,6 +41,7 @@ window.addEventListener('DOMContentLoaded', () => {
          item.appendChild(removebtn);
 
          cartWrapper.appendChild(item);
+
          if (empty) {
             empty.remove();
          }
@@ -95,11 +96,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
    function removeFromCart() {
       const removeBtn = cartWrapper.querySelectorAll('.goods__item-remove');
+      let empty = document.createElement('div');
       removeBtn.forEach(function(btn) {
          btn.addEventListener('click', () => {
             btn.parentElement.remove();
             calcGoods(0);
             calcTotal();
+            if (cartWrapper.childElementCount == 0) {
+               empty.classList.add('empty');
+               empty.textContent = 'Ваша корзина пока пуста';
+               cartWrapper.appendChild(empty);
+            }
          });
       });
    }
